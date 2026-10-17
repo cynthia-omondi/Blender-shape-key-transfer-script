@@ -26,6 +26,8 @@ This automation script eliminates this workflow bottleneck completely.
 
 ---
 
-## Troubleshooting & Constraints
-- **Target contains concave polygons:** If your source mesh causes a Surface Deform bind error, go into edit mode on your body mesh (`Tab`), select all elements (`A`), press `Ctrl + T` to triangulate the surface layout topology, and rerun the tool.
-- **Modifier Stack Order:** The script automatically pushes the runtime binder to the very peak (index 0) of the modifier stack workspace array to process cleanly. Ensure active custom topological dependencies like `Armature` rigs sit below it during runtime.
+## Troubleshooting
+
+### Existing Surface Deform Modifiers
+If your target clothing mesh already has an active, manually applied Surface Deform modifier targeting your source body mesh, **delete or disable it before running the script**. Leaving an active Surface Deform modifier on your mesh while the script builds its temporary iteration loop will stack the deformations, resulting in broken, double-scaled, or completely corrupted shape key bakes.
+
